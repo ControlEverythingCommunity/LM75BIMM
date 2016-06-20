@@ -10,7 +10,7 @@
 // LM75BIMM I2C address is 0x49(73)
 #define Addr 0x49
 
-float cTemp = 0, fTemp = 0;
+double cTemp = 0.0, fTemp = 0.0;
 void setup() 
 {
     // Set variable
@@ -61,11 +61,12 @@ void loop()
     {
         temp -= 512;
     }
-    float cTemp = temp * 0.5;
-    float fTemp = cTemp * 1.8 + 32;
+    cTemp = temp * 0.5;
+    fTemp = cTemp * 1.8 + 32;
     
     // Output data to dashboard
     Particle.publish("Temperature in Celsius:  ", String(cTemp));
+    delay(1000);
     Particle.publish("Temperature in Fahrenheit:  ", String(fTemp));
     delay(1000);
 }
